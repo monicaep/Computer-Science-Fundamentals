@@ -1,4 +1,4 @@
-//Programming Questions
+//Programming Questions -- JavaScript
 /*6. Given an array of integers, find out whether the sum of the integers is a
 perfect square. If it is a perfect square, return the square root, otherwise
 return sum.*/

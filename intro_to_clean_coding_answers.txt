@@ -59,7 +59,8 @@ easy to read and there are no obscure variable names used.
 principles you have learned in this checkpoint.
   a. The following function prints the subtotal of a customer's transaction and
   receives payment accordingly.
-  Original:
+
+Original:
   FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
    PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
 
@@ -72,7 +73,7 @@ principles you have learned in this checkpoint.
    END IF
   END FUNCTION
 
-  Refactored:
+Refactored:
   FUNCTION calculateTotal(subTotal, discountRate)
     PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
   END FUNCTION
@@ -90,7 +91,8 @@ principles you have learned in this checkpoint.
 
   b. The following function checks out a book if there are no issues with the
   guest's account.
-  Original:
+
+Original:
   FUNCTION checkoutBook(book, guest)
     IF guest.accountActive THEN
       IF NOT(guest.hasOverdueBooks) THEN
@@ -105,7 +107,7 @@ principles you have learned in this checkpoint.
     END IF
   END FUNCTION
 
-  Refactored:
+Refactored:
   FUNCTION checkout(book, guest)
     IF guest.accountActive AND IF NOT(guest.hasOverdueBooks) AND IF
     guest.outstandingFees = 0 THEN
@@ -156,7 +158,6 @@ Original:
 END
 
 Refactored:
-
 CLASS transaction
   FUNCTION displayBalance
     PRINT balance
