@@ -1,0 +1,186 @@
+1. In your own words, explain what clean code is and why it is important?
+Clean code is code that is readable and maintainable. It's important because it
+lets yourself and others understand your code more easily. It also makes
+debugging and changes easier because it should be clear what parts of the code
+need to be changed.
+
+2. Read the article.
+
+3. Would you consider the following to be clean code? Explain why or why not. If
+not, refactor the code.
+
+Original:
+FUNCTION do(x, y)               // Creating a new function
+ IF y = "F" THEN               // Check if y is equal "F"
+ SET z to (x−32) * (5/9)       // Formula to convert degrees fahrenheit to celsius
+ PRINT z                       // Print result
+ ELSE IF y = "C" THEN          // If y not equal to "F", check if equal to "C"
+ SET z to x * 1.8000 + 32.00   // Formula to convert degrees celsius to fahrenheit
+ PRINT z                       // Print result
+ END IF
+END FUNCTION
+
+I would not consider this to be clean code. There are many unnecessary comments;
+each line has a comment. The function name and variables don't have meaningful
+names. At first glance it is hard to tell what this function would do, the comments
+are actually what show what the function does, but the purpose of the function
+can be made clear within the code. There are also unnecessary 0's in the numbers
+and correct indentation is not used throughout.
+
+Refactored:
+FUNCTION convertTemperature(temp, scale)
+  IF scale is F THEN
+    PRINT (temp - 32) * (5/9) "celsius"
+  ELSE IF scale is C THEN
+    PRINT x * 1.8 + 32 "fahrenheit"
+  END IF
+END FUNCTION
+
+4. Would you consider the following to be clean code? Explain why or why not. If
+not, refactor the code.
+
+Original:
+FUNCTION calcPercent(sum, total)
+ IF NOT(total = 0) THEN
+     SET percentage to sum / total * 100
+ ELSE
+   PRINT "Sorry, cannot divide by 0"
+ END IF
+
+ PRINT percentage
+END FUNCTION
+
+I would consider this to be clean code because it is easily readable and
+unnecessary comments/code is not included. It is easy to see what the function
+does right away, it calculates percentage. Indentation is used to make the code
+easy to read and there are no obscure variable names used.
+
+5. Using pseudocode, refactor the code for the following examples using the
+principles you have learned in this checkpoint.
+  a. The following function prints the subtotal of a customer's transaction and
+  receives payment accordingly.
+  Original:
+  FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
+   PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
+
+   IF paymentType = 'CASH' THEN
+       CALL getPayment RETURNING amount
+       PRINT "Change due: " + amount - subTotal * discountRate + (subTotal * tax)
+   ELSE IF paymentType = 'CREDIT CARD' THEN
+       CALL getPayment RETURNING amount
+       PRINT "Your credit card has been charged: " + subTotal * discountRate + (subTotal * tax)
+   END IF
+  END FUNCTION
+
+  Refactored:
+  FUNCTION calculateTotal(subTotal, discountRate)
+    PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
+  END FUNCTION
+
+  FUNCTION receivePayment(subTotal, discountRate, paymentType)
+    SET total to subTotal * discountRate + (subTotal * tax)
+    IF paymentType = 'CASH' THEN
+      CALL getPayment RETURNING amount
+      PRINT "Change due: " + amount - subTotal
+    ELSE IF paymentType = 'CREDIT CARD' THEN
+      CALL getPayment RETURNING amount
+      PRINT "Your credit card has been charged: " + total
+    END IF
+  END FUNCTION
+
+  b. The following function checks out a book if there are no issues with the
+  guest's account.
+  Original:
+  FUNCTION checkoutBook(book, guest)
+    IF guest.accountActive THEN
+      IF NOT(guest.hasOverdueBooks) THEN
+        IF guest.outstandingFees = 0 THEN
+          APPEND book to guest.books
+          SET book.status to "Checked Out"
+          PRINT "Your books have been issued."
+        END IF
+      END IF
+    ELSE
+      PRINT "Unable to check out book."
+    END IF
+  END FUNCTION
+
+  Refactored:
+  FUNCTION checkout(book, guest)
+    IF guest.accountActive AND IF NOT(guest.hasOverdueBooks) AND IF
+    guest.outstandingFees = 0 THEN
+      APPEND book to guest.books
+      SET book.status to "Checked Out"
+      PRINT "Your books have been issued."
+    ELSE
+      PRINT "Unable to check out book"
+    END IF
+  END FUNCTION
+
+  c. The following class is a code snippet that should support the transactions
+  a customer can perform at an ATM.
+
+Original:
+  CLASS BankAccount
+
+ FUNCTION displayBalance
+    PRINT balance
+ END FUNCTION
+
+ FUNCTION deposit(amount)
+    SET balance to balance + amount
+ END FUNCTION
+
+ FUNCTION withdraw(amount)
+     IF balance > amount THEN
+       SET balance to balance - amount
+     END
+ END FUNCTION
+
+ FUNCTION creditCardOffer
+     IF NOT(customer.hasCreditCard) THEN
+         CALL offerCreditCard
+     END
+ END FUNCTION
+
+ FUNCTION checkStatus
+     IF NOT(customer.hasCheckingAccount) THEN
+         CALL offerCheckingAccount
+     END
+ END FUNCTION
+
+ ....
+ ....
+ ....
+
+END
+
+Refactored:
+
+CLASS transaction
+  FUNCTION displayBalance
+    PRINT balance
+  END FUNCTION
+
+  FUNCTION deposit(amount)
+    SET balance to balance + amount
+  END FUNCTION
+
+  FUNCTION withdrawal(amount)
+    IF balance > amount THEN
+      SET balance to balance - amount
+    END IF
+  END FUNCTION
+
+CLASS Sales
+  FUNCTION creditCardOffer
+    IF NOT(customer.hasCreditCard) THEN
+      CALL offerCreditCard
+    END IF
+  END FUNCTION
+
+  FUNCTION checkStatus
+    IF NOT(customer.hasCheckingAccount) THEN
+      CALL offerCheckingAccount
+    END IF
+  END FUNCTION
