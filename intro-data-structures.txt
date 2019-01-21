@@ -13,7 +13,7 @@ b) Insert a new person, "Mary" at the end of the line. In other words, you shoul
 insert Mary after Mike.
 c) Find a person in line named "Josh." This function should return the position
 of 2 in the array, (recall that arrays are 0-based).
-d) Find a person in line named "Emily." What should your function return if it 
+d) Find a person in line named "Emily." What should your function return if it
 does not find the item in the array?
 e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of
 her? How would you code this so Melissa appears before Ava?
@@ -66,7 +66,18 @@ her? How would you code this so Melissa appears before Ava?
 
 f) If Patrick wants to leave the line, how would you delete him from the array?
   ```
-  people.splice(3, 1);
+  function removePerson(name, nameList) {
+    let personIndex = 0;
+    for (let i = 0; i < nameList.length; i++) {
+      if (nameList[i] == name) {
+        personIndex = i;
+      }
+    }
+    nameList.splice(personIndex, 1)
+    return nameList;
+  }
+
+  removePerson('Patrick', people);
   ```
 
 2. Provide another real-world example that you can model using a data structure.
