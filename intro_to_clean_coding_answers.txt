@@ -113,7 +113,7 @@ Original:
 
 Refactored:
   FUNCTION checkout(book, guest)
-    IF guest.accountActive AND IF NOT(guest.hasOverdueBooks) AND IF
+    IF guest.accountActive AND NOT(guest.hasOverdueBooks) AND
     guest.outstandingFees = 0 THEN
       APPEND book to guest.books
       SET book.status to "Checked Out"
