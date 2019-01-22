@@ -1,0 +1,62 @@
+Exercises
+
+1. What is the main difference between a stack and a queue?
+A stack arranges elements in LIFO priority and a queue arranges elements in FIFO
+priority.
+
+2. What are the similarities between stacks and queues?
+Both stacks and queues are data structures that developers use to rank tasks,
+create an order of operations, and support system functions. They both organize
+elements using a specific ordering method (LIFO and FIFO).
+
+3. Imagine you are an engineer tasked with implementing the UNDO and REDO options
+in a word processor such as Microsoft Word. Which data structure would you use
+for each option and why?
+For the UNDO option I would use a stack to make use of the LIFO arrangement.
+When you undo something you want the most recent action to be undone. The most
+recent action would be the 'last-in' element and using LIFO arrangement would let
+you access that and make it the 'first-out'.
+For the REDO option I would also use a stack. You want the most recent action to
+be redone with the REDO option and the most recent action would be the 'last-in'
+element.
+
+Programming Questions
+1. Given a string, reverse it using a stack. For example, the string "Bloc!"
+should be converted to "!colB".
+
+Pseudocode:
+FUNCTION reverse(word)
+  INIT a new stack
+  FOR each character in word
+    CALL stack.push WITH character
+  END FOR
+  INIT reversed to empty string
+  WHILE stack is not empty
+    CALL stack.pop RETURNING character
+    APPEND character to reversed
+  END WHILE
+  RETURN reversed
+END FUNCTION
+
+Code:
+function reverse(word) {
+  let stack = word.split('');
+  let reversed = [];
+  while (stack.length != 0) {
+    reversed.push(stack.pop());
+  }
+  return reversed.join('');
+}
+
+2. Implement the pop method of a stack using one queue. Make a FIFO data structure
+mirror the functionality of a LIFO data structure. Since the internal list is not
+the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+Pseudocode:
+FUNCTION removeLast(list)
+  INIT a new queue
+  
+
+END FUNCTION
+
+Code:
