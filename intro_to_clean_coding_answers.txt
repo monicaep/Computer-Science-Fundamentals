@@ -4,7 +4,11 @@ lets yourself and others understand your code more easily. It also makes
 debugging and changes easier because it should be clear what parts of the code
 need to be changed.
 
-2. Read the article.
+2. Another common object that relies on computers is a cellphone. If the code was
+not created to an acceptable standard the phone would likely have issues implementing
+the basic functioning a phone is expected to be able to do. This could include
+issues with the home button, issues charging, and other issues with the UI not
+reacting properly.
 
 3. Would you consider the following to be clean code? Explain why or why not. If
 not, refactor the code.
