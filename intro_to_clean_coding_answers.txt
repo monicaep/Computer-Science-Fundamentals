@@ -13,7 +13,6 @@ reacting properly.
 3. Would you consider the following to be clean code? Explain why or why not. If
 not, refactor the code.
 
-Original:
 FUNCTION do(x, y)               // Creating a new function
  IF y = "F" THEN               // Check if y is equal "F"
  SET z to (x−32) * (5/9)       // Formula to convert degrees fahrenheit to celsius
@@ -43,7 +42,6 @@ END FUNCTION
 4. Would you consider the following to be clean code? Explain why or why not. If
 not, refactor the code.
 
-Original:
 FUNCTION calcPercent(sum, total)
  IF NOT(total = 0) THEN
      SET percentage to sum / total * 100
@@ -64,7 +62,6 @@ principles you have learned in this checkpoint.
   a. The following function prints the subtotal of a customer's transaction and
   receives payment accordingly.
 
-Original:
   FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
    PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
 
@@ -96,7 +93,6 @@ Refactored:
   b. The following function checks out a book if there are no issues with the
   guest's account.
 
-Original:
   FUNCTION checkoutBook(book, guest)
     IF guest.accountActive THEN
       IF NOT(guest.hasOverdueBooks) THEN
@@ -126,7 +122,6 @@ Refactored:
   c. The following class is a code snippet that should support the transactions
   a customer can perform at an ATM.
 
-Original:
   CLASS BankAccount
 
  FUNCTION displayBalance
