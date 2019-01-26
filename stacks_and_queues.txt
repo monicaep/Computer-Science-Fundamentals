@@ -27,14 +27,13 @@ should be converted to "!colB".
 Pseudocode:
 FUNCTION reverse(word)
   INIT a new stack
-  FOR each character in word
-    CALL stack.push WITH character
-  END FOR
-  INIT reversed to empty string
+  CALL word.split('') and set it equal to stack
+  INIT reversed to empty array
   WHILE stack is not empty
     CALL stack.pop RETURNING character
     APPEND character to reversed
   END WHILE
+  CHANGE reversed from an array to a string
   RETURN reversed
 END FUNCTION
 
@@ -54,9 +53,37 @@ the same as defined in the checkpoint, it may help to rewrite the pseudocode fir
 
 Pseudocode:
 FUNCTION removeLast(list)
-  INIT a new queue
-  
-
+  FOR each element in list except the last element
+    MOVE front element to end of list
+  END FOR
+  REMOVE first element in list
+  RETURN list
 END FUNCTION
 
 Code:
+function removeLast(list) {
+  for (i = 0; i < list.length-1; i++) {
+    let temp = list[0];
+    list.shift();
+    list.push(temp);
+  }
+  list.shift();
+  return list;
+}
+
+3. Implement the enqueue and dequeue methods defined in the checkpoint inside
+your own Queue class.
+
+class Queue {
+  constructor(list) {
+    this.list = [];
+  }
+  enqueue(element) {
+    this.list.push(element);
+  }
+  dequeue() {
+    let temp = this.list[0];
+    this.list.shift();
+    return temp;
+  }
+}
