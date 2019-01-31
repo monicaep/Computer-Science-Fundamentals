@@ -1,0 +1,107 @@
+Exercises
+1. What are some pros and cons of using linked lists instead of arrays?
+
+Pros: A linked list doesn't have to use consecutive memory. Each node in the list
+will basically just go wherever there is space for it to go. On the other hand,
+arrays do need consecutive memory. This starts to become problematic especially
+as arrays get larger because they have to find enough consecutive space to fit
+the entire array. Adding elements to an array can also become expensive operations,
+especially if the element is being added to the beginning or middle of the array,
+because every element after the newly added one has to be shifted over one spot.
+
+Cons: A con of linked lists is that elements in the list cannot be as easily
+accessed as elements in an array. In an array each element has a specific index
+and you can easily access that element using that index. However, in a linked
+list each node is connected by having a reference to the next node in line. If
+you are searching for a specific element in a linked list you must start at the
+head and make your way through each node until you get to the one you were
+looking for.
+
+2. Come up with a real world example of a linked list.
+
+A real world example of a doubly linked list is a rumor going around a high
+school - assuming that each person only tells one other person. The rumor has a
+starting position with one person (head) then that person tells another person
+(the second node in the list) and that person tells another person (the third
+node in the list), etc. Each person (node) only has access to the person who they
+heard the rumor from and if they choose to share, the person who they told.
+
+Programming Questions
+
+1. The linked list push function should take a value, create a node, and add it
+to the end of a list. Below is pseudocode for a push function for a singly linked
+list. However, there is something wrong with it. Submit both an explanation of
+the bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node
+END IF
+END FUNCTION
+
+Bug: The function will make the element the head node if there is no head node.
+If there is a head node already the function will set the element to
+head.next, which would be the second node, and this is not necessarily the last
+node in the list.
+
+Code:
+class LinkedList {
+  constructor(node) {
+    this.head = null;
+    this.value = null;
+    this.next = null;
+  }
+
+  push(element) {
+    let currNode = this.head;
+    while (this.next != null) {
+      currNode = this.next;
+    }
+    this.next = element;
+  }
+
+  push(element) {
+    let newNode = {
+      newNode.value = element;
+      newNode.next = null;
+    }
+    let tempNode = this.head;
+    if (this.head = null) {
+      this.head = newNode;
+    } else while (tempNode.next != null) {
+      tempNode = tempNode.next;
+    }
+  } tempNode.next = newNode;
+}
+
+
+
+2. Given an unsorted singly linked list, remove all duplicates from the linked
+list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+Plan: I will create a loop inside of a loop. The first loop will iterate through
+each node and the second loop will compare each node to the node being
+iterated through in the first loop. If the nodes are the same, the second node
+will be removed.
+Another way to do this would be to sort the list and compare each node to
+the node next to it. If the nodes are the same then remove one.
+
+Code:
+function removeDuplicates(list) {
+  
+}
+
+3. Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
