@@ -96,12 +96,26 @@ will be removed.
 Another way to do this would be to sort the list and compare each node to
 the node next to it. If the nodes are the same then remove one.
 
-Code:
-function removeDuplicates(list) {
-  
+class LinkedList {
+  constructor(element) {
+    this.head = {
+      element,
+      next: null
+    };
+  }
 }
+
 
 3. Given an unsorted singly linked list, reverse it.
 Example
 Input: a -> b -> c -> d
 Output: d -> c -> b -> a
+
+Plan: Create a new empty list. Traverse through the original list until the last
+node is reach then push that node to the end of the new list and remove it from
+the original list. Keep doing this until the original list is empty. Create
+helper functions for removing the last node from a list and pushing a node to
+the end of a list.
+Alternatively find the length of the list (n). Then create a loop that moves the
+last node to the head of the list n-1 number of times. Helper functions for
+removing the last node and pushing a node to the head of the list.
