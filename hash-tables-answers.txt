@@ -1,0 +1,24 @@
+1. What is a hash table?
+A hash table is a data structure that stores data in key-value pairs. The value is the data and the key is a unique number given to each value. 
+
+2. What is hashing?
+Keys are usually strings. Hashing converts that string to a number (hash code) so that it can be easily accessed. 
+
+3. How does a hash table store data?
+The data(value) is paired with a unique identifier (key). The value can then be accessed through the unique key. For example, data can be stored using a client's unique ID at a gym. The client's ID can serve as the key and the value can include account information like the client name, when their membership expires, and past visits to the gym. Gym employees can then use the client ID to look up their account information.
+
+4. How are hash tables and objects different?
+Hash tables allow users to access data using a unique identifier. Each bucket in a hash table will contain the same information (consistently formatted values). An object does not use a unique identifier to store values and although the values can also be consistently formatted, it is not required. A hash table also requires a hashing function to convert the unique identifiers to indices that can be easily accessed in an array. 
+
+5. Determine whether you would use a hash table or an object to store each of the following pieces of data:
+- A list of pets and their unique names.--> hash table
+- The name, age, and the birthday of your best friend. --> object
+- The name and location of every company in a given city. --> object 
+- All of the books checked out from a library by a particular individual. --> hash table
+- The primary and secondary phone numbers for a contact. --> hash table
+
+6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
+
+7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
+
+8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
