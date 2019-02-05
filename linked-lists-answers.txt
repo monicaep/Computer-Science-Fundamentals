@@ -46,41 +46,36 @@ ELSE
 END IF
 END FUNCTION
 
-Bug: The function will make the element the head node if there is no head node.
-If there is a head node already the function will set the element to
-head.next, which would be the second node, and this is not necessarily the last
-node in the list.
+Bug: The function will make the element the head node if there is no head node. If there is already a head node the function will set the element to head.next, which would be the second node, and this is not necessarily the last node in the list.
 
 Code:
-class LinkedList {
-  constructor(node) {
-    this.head = null;
-    this.value = null;
-    this.next = null;
-  }
-
-  push(element) {
-    let currNode = this.head;
-    while (this.next != null) {
-      currNode = this.next;
-    }
-    this.next = element;
-  }
-
-  push(element) {
-    let newNode = {
-      newNode.value = element;
-      newNode.next = null;
-    }
-    let tempNode = this.head;
-    if (this.head = null) {
-      this.head = newNode;
-    } else while (tempNode.next != null) {
-      tempNode = tempNode.next;
-    }
-  } tempNode.next = newNode;
+class Node {
+  constructor(element)
+    this.element = element;
+    This.next = null;
 }
 
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+
+  push(element) {
+    let newNode = new Node(element);
+    let currNode = this.head;
+    if (this.head == null) {
+      this.head = newNode;
+      this.length = 1;
+    } else {
+      while (currNode.next != null) {
+        currNode = currNode.next
+      }
+      currNode.next = newNode;
+      this.length++;
+    }
+  }
+}
 
 
 2. Given an unsorted singly linked list, remove all duplicates from the linked
@@ -96,12 +91,49 @@ will be removed.
 Another way to do this would be to sort the list and compare each node to
 the node next to it. If the nodes are the same then remove one.
 
+Code;
+class Node {
+  constructor(element)
+    this.element = element;
+    this.next = null;
+}
+
 class LinkedList {
-  constructor(element) {
-    this.head = {
-      element,
-      next: null
-    };
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+
+  push(element) {
+    let newNode = new Node(element);
+    let currNode = this.head;
+    if (this.head == null) {
+      this.head = newNode;
+      this.length = 1;
+    } else {
+      while (currNode.next != null) {
+        currNode = currNode.next;
+      }
+      currNode.next = newNode;
+      this.length++;
+    }
+  }
+
+  removeDuplicates() {
+    let currNode = this.head;
+    let prevNode;
+    while (currNode) {
+      currNode = currNode.next;
+      while (currNode) {
+        if (currNode.element != currNode.next.element) {
+          currNode = currNode.next;
+        } else if (currNode.element == currNode.next.element) {
+          let prevNode = currNode;
+          currNode = currNode.next;
+        }
+      }
+      prevNode.next = thisNode.next
+    }
   }
 }
 
@@ -111,11 +143,4 @@ Example
 Input: a -> b -> c -> d
 Output: d -> c -> b -> a
 
-Plan: Create a new empty list. Traverse through the original list until the last
-node is reach then push that node to the end of the new list and remove it from
-the original list. Keep doing this until the original list is empty. Create
-helper functions for removing the last node from a list and pushing a node to
-the end of a list.
-Alternatively find the length of the list (n). Then create a loop that moves the
-last node to the head of the list n-1 number of times. Helper functions for
-removing the last node and pushing a node to the head of the list.
+Plan: Create a new empty list. Traverse through the original list until the last node is reach then push that node to the end of the new list and remove it from the original list. Keep doing this until the original list is empty. Create helper functions for removing the last node from a list and pushing a node to the end of a list.
