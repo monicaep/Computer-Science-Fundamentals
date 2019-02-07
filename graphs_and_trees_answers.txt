@@ -1,0 +1,97 @@
+1. What is a binary tree and what makes it unique to other trees?
+A binary tree is a tree where each Node can have up to two children, a right child and a left child. This makes it unique to other trees because it can only have a maximum of two children and they are always either the right or left child. 
+
+2. What is a heuristic?
+A heuristic is an educated guess that an algorithm makes in order to reach a solution faster. 
+
+3. What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+
+4. What is the difference between a depth-first search and a breadth-first search?
+A depth-first search (DFS) searches as deep as it can go down a single branch first before coming back up and going back down again. For example if you use DFS using the right child the search will start at the root Node then travel down the right most branch, always choosing the right child as the next Node until there is not a right child to go to. At that point it will go back up one level and choose the left child and continue right again. 
+A breadth-first search (BFS) searches Nodes by row. It will also start at the root node. Then it will move to the second row of Nodes and search those and so on. 
+
+5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+An undirected graph is a graph that does not have a set direction. An a-cyclic graph is one that does not form loops. An unweighted graph is one where the connection from one node to another is not weighted. 
+
+6. What kind of graph is a binary search tree?
+Undirected, a-cyclic, unweighted
+A binary search tree is undirected because a node can have a connection to both its parent and its children. That Node's parent also has a connection to that Node and its children have a connection to it too, so the connections are two-way connections. A binary tree is a-cyclic because the Node connections don't form loops. A binary tree is unweighted because there is no weight assigned to the connection between Nodes. 
+
+Programming Questions
+1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
+
+Plan:
+To solve this problem I will write a function that takes a value as input and utilizes a DFS to search for that value. Starting at the root node I will travel downwards to the left checking the value of each node. If the value of the node is the equal to the input value then the function will return true. If not the search will continue. If all the nodes are searched and the input value is not found the function will return false. 
+
+Code:
+
+class Node {
+  constructor(value) {
+    this.value = value.
+    this.right = null;
+    this.left = null;
+    this.parent = null;
+  }
+}
+
+class BinaryTree {
+  constructor() {
+    this.root = null;
+  }
+
+  push(value) {
+    let newNode = new Node(value);
+    let currNode = this.root;
+    let parentNode;
+    if (this.root == null) {
+      this.root = newNode;
+    }
+    while (currNode) {
+      if (newNode.value < currNode.value) {
+        if (currNode.left == null) {
+          parentNode = currNode;
+          currNode.left = newNode;
+        }
+        else {
+          parentNode = currNode;
+          currNode.left = currNode;
+        }
+      }
+      else (newNode.value > currNode.value {
+        if (currNode.right == null) {
+          parentNode = currNode;
+          currNode.right = newNode;
+        }
+        else {
+          parentNode = currNode;
+          currNode.right = currNode;
+        }
+      }
+    }
+  }
+
+  find(value) {
+    let currNode = this.root;
+    while (currNode) {
+      if (currNode.value == value) {
+        return true;
+      }
+      else if (currNode.left) {
+        currNode.left = currNode;
+      }
+      else if (!currNode.left) {
+        currNode = currNode.parent.right;
+      }
+    }
+    return false;
+  }
+}
+
+2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+Plan: First I will write a helper function that finds the location of a Node (findLocation(node). Then I will write a function to check the distance between two nodes, taking n1 and n2 as input. The function will first call findLocation(node) using n1 and n2 as input to find the location of both nodes. 
