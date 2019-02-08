@@ -142,6 +142,39 @@ Example
 Input: a -> b -> c -> d
 Output: d -> c -> b -> a
 
-Plan: Create a new empty list. Traverse through the original list until the last node is reach then push that node to the end of the new list and remove it from the original list. Keep doing this until the original list is empty. Create helper functions for removing the last node from a list and pushing a node to the end of a list.
+Plan: Traverse through the list, keeping track of the previous, current and next nodes. While traversing I will reverse the direction the arrow is pointing.
 
 Code:
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  reverse() {
+    if (this.head == null) {
+      return undefined;
+    }
+    else if (this.head.next == null) {
+      return this.head;
+    }
+    else {
+      let prevNode = this.head;
+      let currNode = this.head.next;
+      let nextNode = null;
+      while (currNode) {
+        let temp = currNode;
+        currNode = currNode.next;
+        temp.next = prevNode;
+        prevNode = temp;
+      }
+    }
+  }
+}
