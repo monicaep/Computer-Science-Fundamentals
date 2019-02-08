@@ -2,10 +2,10 @@
 A binary tree is a tree where each Node can have up to two children, a right child and a left child. This makes it unique to other trees because it can only have a maximum of two children and they are always either the right or left child. 
 
 2. What is a heuristic?
-A heuristic is an educated guess that an algorithm makes in order to reach a solution faster. 
+A heuristic is an educated guess that an algorithm makes in order to reach a solution faster. This can lead to lower accuracy/precision in the solution, but you can reach a solution much faster than with using an alternative method of solving the problem. 
 
 3. What is another problem besides the shortest-path problem that requires the use of heuristics?
-
+Antivirus software makes use of heuristics. The antivirus software scans for known virus/malware code/patterns and will flag something as containing a virus/malware if it detects the code/pattern taking place. 
 
 4. What is the difference between a depth-first search and a breadth-first search?
 A depth-first search (DFS) searches as deep as it can go down a single branch first before coming back up and going back down again. For example if you use DFS using the right child the search will start at the root Node then travel down the right most branch, always choosing the right child as the next Node until there is not a right child to go to. At that point it will go back up one level and choose the left child and continue right again. 
