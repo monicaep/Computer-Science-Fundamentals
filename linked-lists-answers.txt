@@ -52,7 +52,7 @@ Code:
 class Node {
   constructor(element)
     this.element = element;
-    This.next = null;
+    this.next = null;
 }
 
 class LinkedList {
@@ -132,7 +132,6 @@ class LinkedList {
           currNode = currNode.next;
         }
       }
-      prevNode.next = thisNode.next
     }
   }
 }
@@ -144,3 +143,5 @@ Input: a -> b -> c -> d
 Output: d -> c -> b -> a
 
 Plan: Create a new empty list. Traverse through the original list until the last node is reach then push that node to the end of the new list and remove it from the original list. Keep doing this until the original list is empty. Create helper functions for removing the last node from a list and pushing a node to the end of a list.
+
+Code:
