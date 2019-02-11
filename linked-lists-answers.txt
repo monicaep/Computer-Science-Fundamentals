@@ -50,9 +50,10 @@ Bug: The function will make the element the head node if there is no head node. 
 
 Code:
 class Node {
-  constructor(element)
+  constructor(element) {
     this.element = element;
     this.next = null;
+  }
 }
 
 class LinkedList {
@@ -93,15 +94,15 @@ the node next to it. If the nodes are the same then remove one.
 
 Code;
 class Node {
-  constructor(element)
+  constructor(element) {
     this.element = element;
     this.next = null;
+  }
 }
 
 class LinkedList {
   constructor() {
     this.head = null;
-    this.length = 0;
   }
 
   push(element) {
@@ -109,13 +110,11 @@ class LinkedList {
     let currNode = this.head;
     if (this.head == null) {
       this.head = newNode;
-      this.length = 1;
     } else {
       while (currNode.next != null) {
         currNode = currNode.next;
       }
       currNode.next = newNode;
-      this.length++;
     }
   }
 
@@ -147,34 +146,62 @@ Plan: Traverse through the list, keeping track of the previous, current and next
 Code:
 
 class Node {
-  constructor(value) {
-    this.value = value;
+  constructor(element) {
+    this.element = element;
     this.next = null;
   }
 }
 
 class LinkedList {
   constructor() {
-    this.head = null;
+    this.head;
+  }
+
+  push(element) {
+    let newNode = new Node(element);
+    let currNode = this.head;
+    if (this.head == null) {
+      this.head = newNode;
+      this.length = 1;
+    } else {
+      while (currNode.next != null) {
+        currNode = currNode.next
+      }
+      currNode.next = newNode;
+      this.length++;
+    }
+  }
+
+  print() {
+    let currNode = this.head;
+    while(currNode) {
+      console.log(currNode.element);
+      currNode = currNode.next;
+    }
   }
 
   reverse() {
-    if (this.head == null) {
-      return undefined;
-    }
-    else if (this.head.next == null) {
+    if (this.head == null || this.head.next == null) {
       return this.head;
     }
-    else {
-      let prevNode = this.head;
-      let currNode = this.head.next;
-      let nextNode = null;
-      while (currNode) {
-        let temp = currNode;
-        currNode = currNode.next;
-        temp.next = prevNode;
-        prevNode = temp;
-      }
+    let prevNode = this.head;
+    let currNode = prevNode.next;
+    while (currNode) {
+        let temp = currNode.next;
+        currNode.next = prevNode;
+        prevNode = currNode;
+        currNode = temp;
     }
+    this.head.next = null;
+    this.head = prevNode;
   }
 }
+
+let list = new LinkedList;
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(4);
+list.print();
+list.reverse();
+list.print();
