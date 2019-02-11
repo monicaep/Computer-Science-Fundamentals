@@ -112,28 +112,81 @@ class LinkedList {
       this.head = newNode;
     } else {
       while (currNode.next != null) {
-        currNode = currNode.next;
+        currNode = currNode.next
       }
       currNode.next = newNode;
     }
   }
 
-  removeDuplicates() {
+  print() {
     let currNode = this.head;
-    let prevNode;
-    while (currNode) {
+    while(currNode) {
+      console.log(currNode.element);
       currNode = currNode.next;
-      while (currNode) {
-        if (currNode.element != currNode.next.element) {
-          currNode = currNode.next;
-        } else if (currNode.element == currNode.next.element) {
-          let prevNode = currNode;
-          currNode = currNode.next;
-        }
+    }
+  }
+
+  remove(element) {
+    let removingNode = new Node(element);
+    let currNode = this.head;
+    let prevNode = null;
+    while (currNode) {
+      if (this.head.element == removingNode.element) {
+        this.head = this.head.next;
       }
+      else if (currNode.element == removingNode.element) {
+        prevNode.next = currNode.next;
+      }
+      prevNode = currNode;
+      currNode = currNode.next;
+    }
+  }
+
+  removeDuplicates() {
+    while (this.head.element == this.head.next.element) {
+      this.head = this.head.next;
+    }
+    let outsideCurrNode = this.head;
+    let insideCurrNode = outsideCurrNode.next;
+    while (insideCurrNode.next) {
+      //console.log('outside: ' + outsideCurrNode.element);
+      while (insideCurrNode.next) {
+         if (outsideCurrNode.element == insideCurrNode.element) {
+           //console.log('same');
+           this.remove(outsideCurrNode.element);
+         }
+         //console.log('inside: ' + insideCurrNode.element);
+        insideCurrNode = insideCurrNode.next;
+      }
+      outsideCurrNode = outsideCurrNode.next;
+      insideCurrNode = outsideCurrNode.next;
+    }
+    if (outsideCurrNode.element == outsideCurrNode.next.element) {
+      this.remove(outsideCurrNode.element);
     }
   }
 }
+
+
+
+let list = new LinkedList();
+list.push(1);
+list.push(1);
+list.push(2);
+list.push(2);
+list.push(3);
+list.removeDuplicates();
+list.print();
+
+let listTwo = new LinkedList();
+listTwo.push(1);
+listTwo.push(2);
+listTwo.push(2);
+listTwo.push(4);
+listTwo.push(5);
+listTwo.push(5);
+listTwo.removeDuplicates();
+listTwo.print();
 
 
 3. Given an unsorted singly linked list, reverse it.
