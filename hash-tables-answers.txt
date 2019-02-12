@@ -1,24 +1,162 @@
 1. What is a hash table?
-A hash table is a data structure that stores data in key-value pairs. The value is the data and the key is a unique number given to each value. 
+A hash table is a data structure that stores data in key-value pairs. The value is the data and the key is a unique number given to each value.
 
 2. What is hashing?
-Keys are usually strings. Hashing converts that string to a number (hash code) so that it can be easily accessed. 
+Keys are usually strings. Hashing converts that string (or whatever else the key may be) to a fixed-length number (hash code) so that it can be easily accessed.
 
 3. How does a hash table store data?
 The data(value) is paired with a unique identifier (key). The value can then be accessed through the unique key. For example, data can be stored using a client's unique ID at a gym. The client's ID can serve as the key and the value can include account information like the client name, when their membership expires, and past visits to the gym. Gym employees can then use the client ID to look up their account information.
 
 4. How are hash tables and objects different?
-Hash tables allow users to access data using a unique identifier. Each bucket in a hash table will contain the same information (consistently formatted values). An object does not use a unique identifier to store values and although the values can also be consistently formatted, it is not required. A hash table also requires a hashing function to convert the unique identifiers to indices that can be easily accessed in an array. 
+Hash tables allow users to access data using a unique identifier. Each bucket in a hash table will contain the same information (consistently formatted values). An object does not use a unique identifier to store values and although the values can also be consistently formatted, it is not required. A hash table also requires a hashing function to convert the unique identifiers to indices that can be easily accessed in an array.
 
 5. Determine whether you would use a hash table or an object to store each of the following pieces of data:
 - A list of pets and their unique names.--> hash table
 - The name, age, and the birthday of your best friend. --> object
-- The name and location of every company in a given city. --> object 
-- All of the books checked out from a library by a particular individual. --> hash table
-- The primary and secondary phone numbers for a contact. --> hash table
+- The name and location of every company in a given city. --> hash table
+- All of the books checked out from a library by a particular individual. --> object
+- The primary and secondary phone numbers for a contact. --> object
 
 6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
 
+class Customer {
+  constructor(name, address, phone) {
+    this.name = name;
+    this.address = address;
+    this.phone = phone;
+  }
+}
+
+class CustomerList {
+  constructor(name, address, phone) {
+    this.customers = [];
+    /*this.name = name;
+    this.address = address;
+    this.phone = phone;*/
+  }
+
+  addCustomer(name, address, phone) {
+    let customer = new Customer(name, address, phone);
+    this.customers.push(customer);
+  }
+
+  findCustomer(phone) {
+    for (let i = 0; i < this.customers.length; i++) {
+      if (this.customers[i].phone == phone) {
+        console.log(this.customers[i]);
+      }
+    }
+  }
+}
+
+let list = new CustomerList();
+list.addCustomer('Susan', '123 NW', 5555555555);
+list.addCustomer('Bob', '456 E', 1111111111);
+list.addCustomer('John', '231 SW', 0001112222);
+
+list.findCustomer(5555555555);
+list.findCustomer(0001112222);
+
 7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
 
+class Item {
+  constructor(name, size, amount) {
+    this.name = name;
+    this.size = size;
+    this.amount = amount;
+  }
+}
+
+class Inventory {
+  constructor() {
+    this.inventory = [];
+  }
+
+  addItem(name, size, amount) {
+    let newItem = new Item(name, size, amount);
+    this.inventory.push(newItem);
+  }
+
+  restockItem(name, amount) {
+    for (let i = 0; i < this.inventory.length; i++) {
+      if (this.inventory[i].name == name) {
+        this.inventory[i].amount = this.inventory[i].amount + amount;
+      }
+    }
+  }
+
+  sellItem(name, amount) {
+    for (let i = 0; i < this.inventory.length; i++) {
+      if (this.inventory[i].name == name) {
+        this.inventory[i].amount = this.inventory[i].amount - amount;
+      }
+    }
+  }
+}
+
+let inventory = new Inventory();
+
+inventory.addItem('T-shirt', 'S', 5);
+inventory.addItem('Sneakers', '7', 3);
+inventory.addItem('Jacket', 'M', 6);
+
+console.log(inventory);
+inventory.restockItem('T-shirt', 2)
+console.log(inventory);
+inventory.sellItem('Jacket', 1);
+console.log(inventory);
+
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
+
+class Newspaper {
+  constructor(publisher, date) {
+    this.publisher = publisher;
+    this.date = date;
+  }
+}
+
+class Database {
+  constructor() {
+    this.database = [];
+  }
+
+  add(publisher, date) {
+    let newspaper = new Newspaper(publisher, date);
+    this.database.push(newspaper);
+  }
+
+  searchByPublisher(publisher) {
+    for (let i = 0; i<this.database.length; i++) {
+      if (this.database[i].publisher == publisher) {
+        console.log(this.database[i]);
+      }
+    }
+  }
+
+  searchByDate(date) {
+    for (let i = 0; i<this.database.length; i++) {
+      if (this.database[i].date == date) {
+        console.log(this.database[i]);
+      }
+    }
+  }
+
+  searchByBoth(publisher, date) {
+    for (let i = 0; i<this.database.length; i++) {
+      if (this.database[i].publisher == publisher && this.database[i].date == date) {
+        console.log(this.database[i]);
+      }
+    }
+  }
+}
+
+let database = new Database();
+
+database.add('PubOne', 1987);
+database.add('PubTwo', 1965);
+database.add('PubOne', 1999);
+database.add('PubThree', 1999);
+
+database.searchByPublisher('PubOne');
+database.searchByDate(1987);
+database.searchByBoth('PubThree', 1999)
