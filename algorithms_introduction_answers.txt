@@ -2,25 +2,36 @@
 
 	Making coffee:
 	FUNCTION makeCoffee(cups)
-	   POUR water into the coffee maker reservoir up the the line that is EQUAL TO the 	   the number of cups of coffee
-	   INSERT paper filter into compartment 
+	   POUR water into the coffee maker reservoir up the the line that is EQUAL TO the number of cups of coffee
+	   INSERT paper filter into compartment
 	   SCOOP an equal amount of scoops as desired cups of coffee
 	   PRESS the on button
 	END FUNCTION
-	
+
 	Washing dishes:
-	FUNCTION wash dishes
-	   
+	FUNCTION wash dishes(dish)
+	   PUT soap on sponge
+		 WHILE dish is dirty
+		 	SCRUB dish with soapy sponge
+		 END WHILE
+		 RINSE dish
+		 PUT dish on drying rack
 	END FUNCTION
-	
+
 	A choice of your own:
 	FUNCTION petCat()
 	   WHILE cat looks happy
-	      Pet cat
+	      PET cat
 	   END WHILE
 	END FUNCTION
 
 2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
 
+a) Tillamook created an algorithm (recipe) for making the best cheddar cheese. Their cheddar cheese is much better than other cheddar cheeses you can buy at the grocery store.
+
+b) YouTube created an algorithm for suggesting videos you might like/be interested in based on the videos you have watched in the past. It exposes their users to new content and has a strong potential to make users spend more time watching videos on YouTube.
+
+c) Google Maps created an algorithm for mapping directions. The directions update based on road conditions and more frequently give the best route options for getting to a destination.
+
 3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
-I think an efficient algorithm involves using steps that are not overly complicated/costly/complex. The steps of an efficient algorithm should be fairly simple to follow. Also, it should not include unnecessary steps. I think an efficient algorithm also means that the algorithm can be easily applied as a solution to different problems. If an algorithm can only solve one problem, it is not very efficient. 
+I think an efficient algorithm involves using steps that are not overly complicated/costly/complex. The steps of an efficient algorithm should be fairly simple to follow. Also, it should not include unnecessary steps. I think an efficient algorithm also means that the algorithm can be easily applied as a solution to different problems. If an algorithm can only solve one problem, it is not very efficient.
