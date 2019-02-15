@@ -1,0 +1,68 @@
+1. What is time complexity and what is its relation to algorithms?
+Time complexity is a function that estimates the time it takes to execute a program. It estimates the efficiency of an algorithm. 
+
+2. What is runtime?
+Runtime is the physical time duration it takes to execute a program. It is often used synonymously with time complexity though. 
+
+3. How is the runtime of an algorithm calculated?
+To calculate the runtime of an algorithm, first you determine the cost of each statement of The algorithm and add then all up. Then you simplify the expression to largest terms and remove any constants. All you'll have left after this is the runtime of the algorithm. 
+
+4. Name the six types of algorithm growth rates we saw in this checkpoint and list them in order of most efficient to least efficient. Now Google another algorithmic growth rate not covered and place it in the correct spot in your list.
+
+	1) Constant Growth Rate O(1)
+	2) Logarithmic Growth Rate O(log n)
+	3) Linear Growth Rate O(n)
+	4) Log-Linear Growth Rate O(n log n)
+	5) Quadratic Growth Rate O(n^2)
+	6) Exponential Growth Rate O(2^n)
+	7) (new one) O(n!)
+
+5. Choose one of the algorithmic growth rates from the last question and make a comparison to a real-life situation.
+A real life example of linear growth is the number of dishes used to make/eat dinner is directly proportional to the number of dishes that must be washed later. 
+
+6. Determine the time complexity of the following snippet of code. It is commonly known as a linear search.
+
+FUNCTION linearSearch(array, target)
+ FOR each number in the array
+   IF number = target THEN
+     RETURN true
+   END IF
+ END FOR
+ RETURN false
+END FUNCTION
+
+Time complexity of linearSearch is O(n) where `n` is the number of elements in the array 
+The worst case scenario is that the function will traverse to the end of the array and return false because the target number was not found. 
+
+7. Determine the time complexity of the following snippet of code.
+If you get stuck, read through the graphical representation section again.
+
+FUNCTION foo(array)
+ FOR each number in the array
+   FOR each number in the array
+     print "Hello"
+   END FOR
+ END FOR
+END FUNCTION
+
+Time complexity of foo is O(n^2)
+Functions with nested `for` loops have a quadratic growth rate
+
+8. Determine the time complexity of the following snippet of code. It is commonly known as the Fibonacci sequence.
+
+FUNCTION fibonacci(number)
+ IF number < 1 THEN
+   ERROR
+ ELSE IF number = 1 or 2 THEN
+   RETURN 1
+ ELSE
+   CALL fibonacci WITH number - 2 RETURNING twoBack
+   CALL fibonacci WITH number - 1 RETURNING oneBack
+   RETURN twoBack + oneBack
+ END IF
+END FUNCTION
+
+Time complexity of fibonacci is O(2^n)
+The fibonacci function is a recursive function
+
+9) The most time efficient code snippet is the linearSearch function.
