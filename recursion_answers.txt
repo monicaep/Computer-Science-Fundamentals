@@ -1,0 +1,36 @@
+1. Define and compare recursion and iteration.
+A recursive solution is one that calls itself repeatedly as part of the solution until it reaches the final solution. An iterative solution is one that uses a loop to iterate through data and/or repeat a process. Usually any problem can be solved both with a recursive solution and iterative solution, but the best solution for the problem is going to depend on the problem. 
+
+2. Name five algorithms that are commonly implemented by recursion.
+Some algorithms that are commonly implemented by recursion are: Binary search, merge sort, quick sort, factorial operations, BFS and DFS
+
+3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+If the solution of a problem can be defined as a combination of sub-results, a recursive solution is best - for example a factorial function. For algorithms that require passing over a collection, an iterative solution works best. Recursive solutions should also be avoided when using recursion is going to have a high cost. For example, using a recursion in a Fibonacci function involves the same calculations being repeated, so the runtime of the program gets exponentially worse as the input grows. 
+
+4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+Factorial: The recursive solution works best for this because recursive solutions are great for algorithms that involve breaking the problem down into smaller problems and putting the solutions together for the final solution, and this is exactly what you are doing with a factorial. Both solutions start with checking to see if the input number is less than 0 and return an error if that is the case. 
+
+Maximum:
+
+Fibonacci: 
+
+
+5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+
+6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+function palindrome(word) {
+  if (word.length == 0 || word.length == 1) {
+    return true;
+  }
+  else {
+    if (word[0] == word[word.length-1]) {
+      return palindrome(word.slice(1, word.length - 1));
+    }
+  }
+  return false;
+}
+
+
+7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
