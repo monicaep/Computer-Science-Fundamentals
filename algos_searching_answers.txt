@@ -1,0 +1,66 @@
+Short Answer
+
+1. What is a real-life scenario that uses linear search?
+A real-life scenario of a linear search is a factory assembly line where someone is checking for defects. Each item that comes down the line has to be examined in order.
+
+2. What is a real-life scenario that uses binary search?
+A real life scenario of a binary search would be looking someone up in a directory. Because we are human it would be difficult to start right at the middle value to compare it the search value but usually people would open up the book to a random page, and then depending on what is in that page flip forward or backward in the book until they found the result they were looking for. 
+
+3. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using linear search?
+It would take 7 iterations to find G using linear search.
+A --> B	--> C --> D --> E --> F --> G
+
+4. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using binary search?
+It would take 3 iterations to find G using binary search.
+
+A   B   C   D   E   F   G
+E   F   G
+G
+
+5. Given an unsorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+If I were allowed to sort the algorithm first, I would sort it first and then use binary search. This is because the worst case scenario for this situation is that the item being searched for is the last item of the list, which means that with a linear search you would have to go through all 999,999 items before the last millionth one to find the item you are searching for. However, if the collection could not be sorted I would use linear search because binary search only works on sorted collections. 
+
+6. Given a sorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+I would use binary search because with each iteration the size of the collection would get cut in half until the item was found. This would be a lot faster than iterating through every single item in the collection. 
+
+Programming Assignment
+1. You and a friend have set a wager to see who can find the word "Albatross" in the dictionary the fastest. Write a program to allow you to win the bet.
+
+function iterativeBinarySearch(collection, value) {
+  let low = 0;
+  let high = collection.length - 1;
+
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2);
+
+    if (collection[mid] == value) {
+      return mid;
+    }
+    else if (collection[mid] < value) {
+       low = mid + 1;
+    }
+    else {
+      high = mid - 1;
+    }
+  }
+  return 'Not found';
+}
+
+let dictionary = ['aardvark', 'albatross', 'banana', 'cat', 'dog', 'elephant', 'fish', 'gorilla', 'hippo'];
+console.log(iterativeBinarySearch(dictionary, 'albatross'));
+
+2. You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
+
+function findFish(tank, fish) {
+  for (let i = 0; i < tank.length; i++) {
+    //console.log(tank[i]);
+    if (tank[i] === fish) {
+      return tank[i];
+    }
+  }
+  return 'Fish not found';
+}
+
+let tank = ['gold', 'white', 'orange', 'white spotted', 'black'];
+
+console.log(findFish(tank, 'white spotted'));
