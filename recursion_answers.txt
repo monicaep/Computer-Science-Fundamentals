@@ -11,11 +11,27 @@ If the solution of a problem can be defined as a combination of sub-results, a r
 Factorial: The recursive solution works best for this because recursive solutions are great for algorithms that involve breaking the problem down into smaller problems and putting the solutions together for the final solution, and this is exactly what you are doing with a factorial. Both solutions start with checking to see if the input number is less than 0 and return an error if that is the case. 
 
 Maximum:
+The recursive solution for this uses a few if statements, while the iterative solution just uses a for loop. The iterative solution is better for this because it only requires iterating through each item in the collation once whereas the recursive solution is a bit more complex.
 
 Fibonacci: 
-
+The recursive solution calls the fibonacci function calls itself twice within itself. The iterative version has to keep track of the current and previous number. The iterative solution works better for this because the recursive solution includes repetition of calculations. The greater the input, the more repeated calculations there will be with the recursive solution. 
 
 5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+function count(collection) {
+  if (collection[0]) {
+    return 1 + count(collection.slice(1));
+  }  
+  else {
+    return 0;
+  }
+}
+
+let testArray = [1, 2, 3, 4, 5, 6];
+console.log(count(testArray));
+
+let testTwo = [];
+console.log(count(testTwo));
 
 
 6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
@@ -34,3 +50,4 @@ function palindrome(word) {
 
 
 7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+This behavior exhibits properties of recursion because a recursive solution involves calling itself with the solution. So when you search for recursion it calls itself again and asks if you meant recursion. 
