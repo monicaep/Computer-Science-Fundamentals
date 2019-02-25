@@ -1,0 +1,84 @@
+1. Write pseudocode for bubble sort.
+Pseudocode:
+FUNCTION swap(collection, x, y)
+	set temp to item at index x
+	set item at index x to item at index y
+	set item at index y to temp
+END FUNCTION
+
+FUNCTION bubbleSort(collection)
+	FOR each item in collection starting at first item
+		FOR each item in collection starting at second item
+			IF previous item is greater than current item
+				CALL swap function (collection, previous item, current item)
+			END IF
+		END FOR
+	END FOR
+	RETURN collection
+END FUNCTION
+
+JavaScript:
+function swap(collection, x, y) {
+  let temp = collection[x];
+  collection[x] = collection[y];
+  collection[y] = temp;
+}
+
+function bubbleSort(collection) {
+  for (let i = 0; i < collection.length; i++) {
+    for (let j = 1; j < collection.length; j++) {
+      if (collection[j - 1] > collection[j]) {
+        swap(collection, j-1, j);
+      }
+    }
+  }
+  return collection;
+}
+
+2. Write pseudocode for quicksort.
+Pseudocode:
+FUNCTION quickSort(collection)
+	IF collection length <= 1 THEN
+		RETURN collection
+	SET pivot to LAST item in collection
+	SET right to empty array
+	SET left to empty array
+	FOR each item in collection not including the last item
+		IF item is greater than the pivot THEN
+			PUSH item to right
+		ELSE
+			PUSH item to left
+		END IF
+	END FOR
+	RETURN call quickSort on left concat pivot and call quickSort on right	
+END FUNCTION
+
+JavaScript:
+function quickSort(collection) {
+   if (collection.length <= 1) {
+     return collection;
+   }
+   
+   let pivot = collection[collection.length-1];
+   let right = [];
+   let left = [];
+
+   for (let i = 0; i < collection.length - 1; i++) {
+     if (collection[i] > pivot) {
+       right.push(collection[i]);
+     }
+     else {
+       left.push(collection[i]);
+     }
+   }
+   return quickSort(left).concat(pivot, quickSort(right));
+}
+
+let test = [4, 5, 7, 3, 1, 9, 8];
+console.log(quickSort(test));
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+Merge Sort and Quick Sort are more efficient than the other methods because they involve breaking up the total input into smaller chunks, then putting them back together. This means that as the input grows the efficiency will be less affected. For example, when using Bubble Sort, you must iterate through the entire collection multiple times, swapping items until they are sorted. As the input grows, more and more items must be iterated over multiple times. 
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+In bucket sort the items of a collection are put into buckets and then those buckets can be sorted by recursively applying bucket sorting or using a different sorting algorithm. The buckets are then put back in sorted order. When you use bucket sort you have to have a way of indexing each of the items in the collection. Bucket sort also works best when the data is uniformly distributed so that the distribution in the buckets is good. 
