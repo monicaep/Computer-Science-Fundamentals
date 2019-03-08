@@ -1,0 +1,164 @@
+1. List the commands for adding, updating, and deleting data.
+Adding: 
+`INSERT INTO`
+Updating:
+`UPDATE`
+Deleting:
+`DELETE`
+
+2. Explain the structure for each type of command.
+Adding:
+```
+INSERT INTO "table name" ("column name 1", "column name 2", "column name 3"...) VALUES 
+("value to be inserted into column 1", "value to be inserted into column 2", "value to be inserted into column 3"...);
+```
+
+Updating:
+```
+UPDATE "table name" SET "column name of column being updated"="new value" WHERE "something to identify the row; column name = value";
+```
+
+Deleting:
+```
+DELETE FROM "table name" WHERE "something to identify what you want to delete; column name = value";
+```
+
+3. What are some of the data types that can be used in tables? Give a real-world example of each type.
+
+Currency - can be used for the price of goods
+Date - can be used for the date that a purchase was made
+Char - can be used for a string of fixed length, like the code for a state (ex: WA, HI, etc)
+Varchar - can be used for a string of variable length, like the name of a product (ex: long sleeve shirt, shoes, etc)
+
+4. Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first and last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals (1 for adults and 1/2 for children).
+
+- Which data type would you use to store each of the following pieces of information?
+   - First and last name. --> varchar(20)
+   - Whether they sent in their RSVP. --> boolean
+   - Number of guests. --> smallint
+   - Number of meals. --> numeric(2, 1)
+
+- Write a command that creates the table to track the wedding dinner.
+```
+CREATE TABLE dinner (
+	first varchar(30),
+	last varchar(30),
+	RSVP boolean,
+	guests smallint,
+	meals numeric(2, 1)
+);
+```
+
+- Write a command that adds a column to track whether the guest sent a thank you card.
+```
+ALTER TABLE dinner ADD COLUMN thank_you_card boolean;
+```
+
+- You have decided to move the data about the meals to another table, so write a command to remove the column storing the number meals from the wedding table.
+```
+ALTER TABLE dinner DROP COLUMN meals;
+```
+
+- The guests will need a place to sit at the reception, so write a command that adds a column for table number.
+```
+ALTER TABLE dinner ADD COLUMN table smallint;
+```
+
+- The wedding is over and we do not need to keep this information, so write a command that deletes the table numbers from the database.
+```
+DROP TABLE dinner;
+```
+5. Write a command to create a new table to hold the books in a library with the columns ISBN, title, author, genre, publishing date, number of copies, and available copies.
+```
+CREATE TABLE books (
+	ISBN integer,
+	title varchar(100),
+	author varchar(40),
+	genre varchar(30),
+	total_copies smallint,
+	available_copies smallint
+);
+```
+
+- Find three books and add their information to the table.
+```
+INSERT INTO books (ISBN, title, author, genre, total_copies, available_copies)
+VALUES
+(9780807286012, 'Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 'Fantasy', 7, 4),
+(9781781100028, 'Harry Potter and the Prisoner of Azkaban', 'J.K. Rowling', 'Fantasy', 8, 2),
+(9781413185096, 'Harry Potter and the Goblet of Fire', 'J.K. Rowling', 'Fantasy', 6, 3);
+```
+- Someone has just checked out one of the books. Change the number of available copies to 1 fewer.
+```
+UPDATE books SET available_copies=available_copies-1 WHERE ISBN=9781413185096;
+```
+- Now one of the books has been added to the banned books list. Remove it from the table.
+```
+DELETE FROM books WHERE ISBN=9780807286012;
+```
+
+6. Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, country of origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate miles from Earth. In addition to the table creation, provide commands that perform the following operations:
+```
+CREATE TABLE spacecrafts (
+	id integer,
+	name varchar(30),
+	launch date,
+	country char(3),
+	description varchar(300),
+	orbiting_body varchar(20),
+	operating boolean,
+	distance integer
+);
+```
+
+- Add three non-Earth-orbiting satellites to the table.
+```
+INSERT INTO spacecrafts (id, name, launch, country, description, orbiting_body, operating, distance)
+VALUES
+(15589, 'Akatsuki', 2010-05-20, 'JPN', 'The first Japanese Venusian probe. Also known as Planet-C and Venus Climate Orbiter, Akatsuki failed to enter Venusian orbit in December 2010. It continued to function and entered Venus orbit in 2015.', 'Venus', 'false', 162000000),
+(15590, 'Mangalyaan', 2013-11-05, 'IND', 'The first Indian interplanetary space probe. It was successfully inserted into orbit of Mars on 24 September 2014.', 'Mars', 'true', 140000000),
+(15591, 'MAVEN', 2013-11-18, 'USA', 'Study the Martian upper atmosphere and its gradual loss to space.', 'Mars', 'true', 140000000);
+```
+
+- Remove one of the satellites from the table since it has just crashed into the planet.
+```
+DELETE FROM spacecrafts WHERE id=15591;
+```
+
+- Edit another satellite because it is no longer operating and change the value to reflect that.
+```
+UPDATE spacecrafts SET operating='false' WHERE id=15590;
+```
+
+7. Write a command to create a new table to hold the emails in your inbox. This table should include an id, the subject line, the sender, any additional recipients, the body of the email, the timestamp, whether or not you have read the email, and the id of the email chain it's in. Also provide commands that perform the following operations:
+```
+CREATE TABLE email (
+	id integer,
+	subject varchar(30),
+	sender varchar(20),
+	recipients varchar(100),
+	body varchar(5000),
+	received timestamp,
+	read boolean,
+	mail_chain_id integer
+);
+```
+
+- Add three new emails to the inbox.
+```
+INSERT INTO email (id, subject, sender, recipients, body, received, read, mail_chain_id)
+VALUES
+(798, 'Lunch Plans', 'katyg@gmail.com', 'joeharry@gmail.com', 'Hey guys! Let's get lunch this week with Bill.' 2018-04-09 3:45:44, 'true', 455),
+(799, 'Order Confirmation, 'shoes@shoes.com', '', 'Hello, we received your order. Please find your tracking number below: 325205208209590252.', 2018-04-09 4:15:23, 'true', 456),
+(800, 'Lunch Plans', 'joeharry@gmail.com', 'katyg@gmail.com', 'That sounds great! I'm free Tuesday or Wednesday.', 2018-04-09 5:16:11, 'false', 455);
+```
+
+- You deleted one of the emails, so write a command to remove the row from the inbox table.
+```
+DELETE FROM email WHERE id=799;
+```
+
+- You started reading an email but just heard a crash in another room. Mark the email as unread before investigating the crash, so you can come back and read it later.
+```
+UPDATE email SET read='false' WHERE id=800;
+```
