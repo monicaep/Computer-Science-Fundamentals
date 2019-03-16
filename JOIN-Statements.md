@@ -42,3 +42,141 @@ JOIN shifts as s ON ss.shift_id = s.id;
 ```
 
 8. Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
+
+**Query #1**
+
+    /*Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well.*/
+
+    SELECT v.first_name, v.last_name, d.name
+    FROM volunteers AS v
+    LEFT OUTER JOIN dogs AS d
+    ON v.foster_dog_id = d.id;
+
+| first_name | last_name  | name      |
+| ---------- | ---------- | --------- |
+| Rubeus     | Hagrid     | Munchkin  |
+| Marjorie   | Dursley    | Marmaduke |
+| Sirius     | Black      |           |
+| Remus      | Lupin      |           |
+| Albus      | Dumbledore |           |
+
+---
+**Query #2**
+
+    /*The cat's name, adopter's name, and adopted date for each cat adopted within the past month to be displayed as part of the "Happy Tail" social media promotion which posts recent successful adoptions.*/
+
+    SELECT c.name, a.first_name, a.last_name, ca.date
+    FROM cat_adoptions AS ca
+    JOIN cats AS c ON ca.cat_id = c.id
+    JOIN adopters AS a ON ca.adopter_id = a.id
+    WHERE ca.date > CURRENT_DATE - 30;
+
+| name     | first_name | last_name | date                     |
+| -------- | ---------- | --------- | ------------------------ |
+| Mushi    | Arabella   | Figg      | 2019-02-24T00:00:00.000Z |
+| Victoire | Argus      | Filch     | 2019-03-01T00:00:00.000Z |
+
+---
+**Query #3**
+
+    /*Create a list of adopters who have not yet chosen a dog to adopt.*/
+
+    SELECT a.first_name, a.last_name
+    FROM dog_adoptions AS da
+    JOIN adopters AS a ON da.adopter_id <> a.id;
+
+| first_name | last_name |
+| ---------- | --------- |
+| Hermione   | Granger   |
+| Arabella   | Figg      |
+
+---
+**Query #4**
+
+    /*Lists of all cats and all dogs who have not been adopted.*/
+
+
+    SELECT c.name
+    FROM cat_adoptions AS ca
+    RIGHT OUTER JOIN cats AS c
+    ON ca.cat_id = c.id WHERE ca.cat_id IS NULL;
+
+| name     |
+| -------- |
+| Seashell |
+| Nala     |
+
+---
+**Query #5**
+
+    SELECT d.name
+    FROM dog_adoptions AS da
+    RIGHT OUTER JOIN dogs as d
+    ON da.dog_id = d.id WHERE da.dog_id IS NULL;
+
+| name      |
+| --------- |
+| Boujee    |
+| Munchkin  |
+| Marley    |
+| Lassie    |
+| Marmaduke |
+
+---
+**Query #6**
+
+    /*The name of the person who adopted Rosco.*/
+
+    SELECT a.first_name, a.last_name
+    FROM dog_adoptions AS da
+    JOIN adopters AS a
+    ON da.adopter_id = a.id
+    JOIN dogs AS d
+    ON da.dog_id = d.id;
+
+| first_name | last_name |
+| ---------- | --------- |
+| Argus      | Filch     |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/tpodLv3A43VL4gHqohqx2o/0)
+
+9. Using this Library schema and data, write queries applying the following scenarios and include the results:
+
+**Query #1**
+
+    /*To determine if the library should buy more copies of a given book, please provide the names and position, in order, of all of the patrons with a hold (request for a book with all copies checked out) on "Advanced Potion-Making".*/
+
+    SELECT p.name, h.rank
+    FROM holds AS h
+    JOIN patrons AS p
+    ON h.patron_id = p.id
+    JOIN books AS b
+    ON h.isbn = b.isbn WHERE b.title = 'Advanced Potion-Making'
+    ORDER BY h.rank;
+
+| name           | rank |
+| -------------- | ---- |
+| Terry Boot     | 1    |
+| Cedric Diggory | 2    |
+
+---
+**Query #2**
+
+    /*List all of the library patrons. If they have one or more books checked out, list the books with the patrons.*/
+
+    SELECT p.name, b.title
+    FROM transactions AS t
+    RIGHT OUTER JOIN patrons AS p ON t.patron_id = p.id
+    JOIN books AS b ON t.isbn = b.isbn
+    WHERE t.checked_in_date IS NULL;
+
+| name           | title                                   |
+| -------------- | --------------------------------------- |
+| Terry Boot     | Advanced Potion-Making                  |
+| Cedric Diggory | Fantastic Beasts and Where to Find Them |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/j4EGoWzHWDBVtiYzB9ygC4/0)
