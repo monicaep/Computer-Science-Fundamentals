@@ -19,144 +19,175 @@ Hash tables allow users to access data using a unique identifier. Each bucket in
 
 6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
 
+```
+function hash(string, capacity) {
+  let hash = 0;
+  for (let i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % capacity;
+};
+
 class Customer {
-  constructor(name, address, phone) {
+  constructor(phone, name, address) {
+    this.phone = phone;
     this.name = name;
     this.address = address;
-    this.phone = phone;
   }
 }
 
-class CustomerList {
-  constructor(name, address, phone) {
-    this.customers = [];
-    /*this.name = name;
-    this.address = address;
-    this.phone = phone;*/
+class HashTable {
+  constructor() {
+    this.bucketCount = 1000;
+    this.buckets = [];
   }
 
-  addCustomer(name, address, phone) {
-    let customer = new Customer(name, address, phone);
-    this.customers.push(customer);
+  getBucketIndex(phone) {
+    return hash(phone, this.bucketCount);
   }
 
-  findCustomer(phone) {
-    for (let i = 0; i < this.customers.length; i++) {
-      if (this.customers[i].phone == phone) {
-        console.log(this.customers[i]);
-      }
-    }
+  getBucket(phone) {
+    this.buckets[this.getBucketIndex(phone)];
+  }
+
+  addCustomer(phone, name, address) {
+    let newCustomer = new Customer(phone, name, address);
+    this.buckets[this.getBucketIndex(phone)] = newCustomer;
+  }
+
+  getCustomer(phone) {
+    return ('Name: ' + this.buckets[this.getBucketIndex(phone)].name + ' Address: ' + this.buckets[this.getBucketIndex(phone)].address);
   }
 }
 
-let list = new CustomerList();
-list.addCustomer('Susan', '123 NW', 5555555555);
-list.addCustomer('Bob', '456 E', 1111111111);
-list.addCustomer('John', '231 SW', 0001112222);
+let customers = new HashTable();
+customers.addCustomer('(123)123-1233', 'Molly', '123 S');
+customers.addCustomer('(222)222-2222', 'Bob', '456 E');
+customers.addCustomer('(567)888-343', 'Sally', '567 N');
 
-list.findCustomer(5555555555);
-list.findCustomer(0001112222);
-
+console.log(customers.getCustomer('(123)123-1233'));
+console.log(customers.getCustomer('(222)222-2222'));
+console.log(customers.getCustomer('(567)888-343'));
+```
 7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
 
+```
+function hash (string, capacity) {
+  let hash = 0;
+  for (let i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % capacity;
+};
+
 class Item {
-  constructor(name, size, amount) {
+  constructor(sku, name, amount) {
+    this.sku = sku;
     this.name = name;
-    this.size = size;
     this.amount = amount;
   }
-}
+};
 
-class Inventory {
+class HashTable {
   constructor() {
-    this.inventory = [];
+    this.bucketCount = 1000;
+    this.buckets = [];
   }
 
-  addItem(name, size, amount) {
-    let newItem = new Item(name, size, amount);
-    this.inventory.push(newItem);
+  getBucketIndex(sku) {
+    return hash(sku, this.bucketCount);
   }
 
-  restockItem(name, amount) {
-    for (let i = 0; i < this.inventory.length; i++) {
-      if (this.inventory[i].name == name) {
-        this.inventory[i].amount = this.inventory[i].amount + amount;
-      }
-    }
+  getBucket(sku) {
+    this.buckets[this.getBucketIndex(sku)];
   }
 
-  sellItem(name, amount) {
-    for (let i = 0; i < this.inventory.length; i++) {
-      if (this.inventory[i].name == name) {
-        this.inventory[i].amount = this.inventory[i].amount - amount;
-      }
-    }
+  addNewItem(sku, name, amount) {
+    let newItem = new Item(sku, name, amount);
+    this.buckets[this.getBucketIndex(sku)] = newItem;
+  }
+
+  getItem(sku) {
+    return ('Name: ' + this.buckets[this.getBucketIndex(sku)].name + ' Amount: ' + this.buckets[this.getBucketIndex(sku)].amount);
+  }
+
+  restockItem(sku, addAmount) {
+    this.buckets[this.getBucketIndex(sku)].amount += addAmount;
+  }
+
+  sellItem(sku, sellAmount) {
+    this.buckets[this.getBucketIndex(sku)].amount -= sellAmount;
   }
 }
 
-let inventory = new Inventory();
+let inventory = new HashTable();
+inventory.addNewItem('A1', 't-shirt', 25);
+inventory.addNewItem('B2', 'skinny jeans', 20);
+inventory.addNewItem('C3', 'sneakers', 15);
 
-inventory.addItem('T-shirt', 'S', 5);
-inventory.addItem('Sneakers', '7', 3);
-inventory.addItem('Jacket', 'M', 6);
+//console.log(inventory);
 
-console.log(inventory);
-inventory.restockItem('T-shirt', 2)
-console.log(inventory);
-inventory.sellItem('Jacket', 1);
-console.log(inventory);
+console.log(inventory.getItem('A1'));
+inventory.restockItem('A1', 3);
+console.log(inventory.getItem('A1'));
+
+console.log(inventory.getItem('B2'));
+inventory.sellItem('B2', 1);
+console.log(inventory.getItem('B2'));
+
+console.log(inventory.getItem('C3'));
+inventory.sellItem('C3', 2);
+console.log(inventory.getItem('C3'));
+```
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
 
+```
+function hash (publisher, date, capacity) {
+  let hash = 0;
+  let string = publisher.concat('', date);
+  for (let i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % capacity;
+}
+
 class Newspaper {
-  constructor(publisher, date) {
+  constructor(publisher, date, paper) {
     this.publisher = publisher;
     this.date = date;
+    this.paper = paper;
   }
 }
 
-class Database {
+class HashTable {
   constructor() {
-    this.database = [];
+    this.bucketCount = 10;
+    this.buckets = [];
   }
 
-  add(publisher, date) {
-    let newspaper = new Newspaper(publisher, date);
-    this.database.push(newspaper);
+  getBucketIndex(publisher, date) {
+    return hash(publisher, date, this.bucketCount);
   }
 
-  searchByPublisher(publisher) {
-    for (let i = 0; i<this.database.length; i++) {
-      if (this.database[i].publisher == publisher) {
-        console.log(this.database[i]);
-      }
-    }
+  addPaper(publisher, date, paper) {
+    let newPaper = new Newspaper(publisher, date, paper);
+    this.buckets[this.getBucketIndex(publisher, date)] = newPaper;
   }
 
-  searchByDate(date) {
-    for (let i = 0; i<this.database.length; i++) {
-      if (this.database[i].date == date) {
-        console.log(this.database[i]);
-      }
-    }
-  }
-
-  searchByBoth(publisher, date) {
-    for (let i = 0; i<this.database.length; i++) {
-      if (this.database[i].publisher == publisher && this.database[i].date == date) {
-        console.log(this.database[i]);
-      }
-    }
+  findPaper(publisher, date) {
+    return this.buckets[this.getBucketIndex(publisher, date)];
   }
 }
 
-let database = new Database();
+let newspapers = new HashTable();
+newspapers.addPaper('LV Review Journal', '09-25-1993', 'Heavy Traffic Due to Major Road Work');
+newspapers.addPaper('News Media', '10-17-1990', 'Tornado in Kansas');
+newspapers.addPaper('Daily Prophet News', '01-29-1997', 'Weasley wins the lottery');
 
-database.add('PubOne', 1987);
-database.add('PubTwo', 1965);
-database.add('PubOne', 1999);
-database.add('PubThree', 1999);
+//console.log(newspapers);
 
-database.searchByPublisher('PubOne');
-database.searchByDate(1987);
-database.searchByBoth('PubThree', 1999)
+console.log(newspapers.findPaper('LV Review Journal', '09-25-1993'));
+console.log(newspapers.findPaper('News Media', '10-17-1990'));
+console.log(newspapers.findPaper('Daily Prophet News', '01-29-1997'));
+```
